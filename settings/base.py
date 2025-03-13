@@ -27,11 +27,9 @@ DJANGO_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
-PROJECT_APPS = []
-THIRD_PARTY_APPS = [
-    "channels",
-]
-INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
+PROJECT_APPS = ["pnr.apps.PnrConfig", "conf.apps.ConfConfig"]
+THIRD_PARTY_APPS = ["channels", "django_extensions", "daphne"]
+INSTALLED_APPS = THIRD_PARTY_APPS + DJANGO_APPS + PROJECT_APPS
 
 
 MIDDLEWARE = [
@@ -121,3 +119,83 @@ MEDIA_URL = Settings.MEDIA_URL
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = Settings.DEFAULT_AUTO_FIELD
+
+
+# Logging Configuration
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "{levelname} - {asctime} - {name} - {message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "file": {
+            "level": "INFO",
+            "class": "logging.FileHandler",
+            "filename": "debug.log",
+            "formatter": "verbose",
+        },
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console", "file"],
+        "level": "INFO",
+    },
+}
+
+# Railway Configuration Urls
+# =====================================================
+NTES_V1_BASE_URL = config.get("NTES_V1_BASE_URL")
+NTES_V2_BASE_URL = config.get("NTES_V2_BASE_URL")
+CAPTCHA_DRAW_URL = config.get("CAPTCHA_DRAW_URL")
+TRAIN_ROUTE_URL = config.get("TRAIN_ROUTE_URL")
+FETCH_TRAIN_DATA_URL = config.get("FETCH_TRAIN_DATA_URL")
+PNR_STATUS_URL = config.get("PNR_STATUS_URL")
+
+# Cache Configuration
+# =====================================================
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.db.DatabaseCache",
+        "LOCATION": "meri_rail_cache",
+    }
+}
+
+# Mappls Api Configuration
+MAPPLS_API_KEY = config.get("MAPPLS_API_KEY")
+
+# Coogle Api Credentials Path
+REDIRECT_URI = config.get("REDIRECT_URI")
+CREDENTIALS_JSON = join(BASE_DIR, "fixtures/google/credentials.json")
+TOKEN_JSON = join(BASE_DIR, "fixtures/google/token.json")
+CLIENT_CONFIG = {
+    "web": {
+        "client_id": config.get("CLIENT_ID"),
+        "client_secret": config.get("CLIENT_SECRET"),
+        "auth_uri": config.get("AUTH_URI"),
+        "token_uri": config.get("TOKEN_URI"),
+    }
+}
+WEB_CLIENT_CONFIG = {
+    "web": {
+        "client_id": config.get("WEB_CLIENT_ID"),
+        "client_secret": config.get("WEB_CLIENT_SECRET"),
+        "auth_uri": config.get("AUTH_URI"),
+        "token_uri": config.get("TOKEN_URI"),
+    }
+}
+CREDENTIALS_CONFIG = {
+    "token_uri": config.get("TOKEN_URI"),
+    "client_id": config.get("CLIENT_ID"),
+    "client_secret": config.get("CLIENT_SECRET"),
+    "scopes": [
+        "https://www.googleapis.com/auth/calendar.readonly",
+        "https://www.googleapis.com/auth/calendar.events",
+    ],
+    "universe_domain": "googleapis.com",
+}

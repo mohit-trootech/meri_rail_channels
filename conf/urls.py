@@ -17,7 +17,9 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
+from pnr.views import ProcessDataView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("process_data/", ProcessDataView.as_view(), name="process_data"),
 ]
