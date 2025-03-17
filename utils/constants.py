@@ -1,5 +1,12 @@
 from django.utils.translation import gettext_lazy as _  # noqa
 
+CONFIGURED_CAPTCHA = "0"
+NOT_CONFIGURE_CAPTCHA = "1"
+
+
+class Fixtures:
+    PAGE_SS = "fixtures/temp/page_screenshot.png"
+
 
 class Settings:
     ROOT_URLCONF = "conf.urls"
@@ -27,6 +34,18 @@ class AppLabelsModels:
     PNR_STATUS = {
         "app_label": "pnr",
         "model_name": "PnrStatus",
+    }
+    REQUEST_TYPE = {
+        "app_label": "conf",
+        "model_name": "RequestType",
+    }
+    SEAT_STATUS = {
+        "app_label": "seat",
+        "model_name": "SeatStatus",
+    }
+    FARE_STATUS = {
+        "app_label": "fare",
+        "model_name": "FareStatus",
     }
 
 
@@ -80,3 +99,16 @@ class UrlsV1:
     FARE = "CommonCaptcha?inputCaptcha=%(captcha)s&trainNo=%(train)s&dt=%(dt)s&sourceStation=%(from_station)s&destinationStation=%(to_station)s&classc=%(train_cls)s&quota=%(quota)s&inputPage=FARE&language=en&_=%(time)s"
     TRAIN_BETWEEN_STATIONS = "CommonCaptcha?inputCaptcha=%(captcha)s&dt=%(dt)s&sourceStation=%(from_station)s&destinationStation=%(to_station)s&flexiWithDate=n&inputPage=TBIS&language=en&_=%(time)s"
     SEAT_AVAILABILITY = "CommonCaptcha?inputCaptcha=%(captcha)s&trainNo=%(train)s&dt=%(dt)s&sourceStation=%(from_station)s&destinationStation=%(to_station)s&classc=%(train_cls)s&quota=%(quota)s&inputPage=SEAT&language=en&_=%(time)s"
+
+
+class Timeout:
+    """Timeout Constants"""
+
+    FIVE_SECONDS = 5
+    TEN_SECONDS = 10
+    THIRTY_SECONDS = 30
+    FIFTY_SECONDS = 50
+    SIXTY_SECONDS = 60
+    ONE_HUNDRED_SECONDS = 100
+    TWO_HUNDRED_SECONDS = 200
+    FIVE_HUNDRED_SECONDS = 500

@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name="PnrStatus",
+            name="FareStatus",
             fields=[
                 (
                     "id",
@@ -62,7 +62,7 @@ class Migration(migrations.Migration):
                 ("response_body", models.JSONField(blank=True, null=True)),
             ],
             options={
-                "db_table": "pnr_status",
+                "db_table": "fare_status",
                 "ordering": ["-created"],
             },
         ),

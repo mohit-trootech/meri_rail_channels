@@ -1,10 +1,10 @@
 from channels.generic.websocket import SyncConsumer
 from json import loads, dumps
-from pnr.service import PnrService
+from seat.service import SeatService
 
 
-class PnrConsumer(SyncConsumer):
-    service_class = PnrService()
+class SeatConsumer(SyncConsumer):
+    service_class = SeatService()
 
     def websocket_connect(self, event):
         print("connected", event)

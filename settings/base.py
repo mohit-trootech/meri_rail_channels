@@ -27,7 +27,12 @@ DJANGO_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
-PROJECT_APPS = ["pnr.apps.PnrConfig", "conf.apps.ConfConfig"]
+PROJECT_APPS = [
+    "pnr.apps.PnrConfig",
+    "conf.apps.ConfConfig",
+    "seat.apps.SeatConfig",
+    "fare.apps.FareConfig",
+]
 THIRD_PARTY_APPS = ["channels", "django_extensions", "daphne"]
 INSTALLED_APPS = THIRD_PARTY_APPS + DJANGO_APPS + PROJECT_APPS
 
@@ -152,6 +157,7 @@ LOGGING = {
 # =====================================================
 NTES_V1_BASE_URL = config.get("NTES_V1_BASE_URL")
 NTES_V2_BASE_URL = config.get("NTES_V2_BASE_URL")
+CAPTCHA_CONFIGURE_URL = config.get("CAPTCHA_CONFIGURE_URL")
 CAPTCHA_DRAW_URL = config.get("CAPTCHA_DRAW_URL")
 TRAIN_ROUTE_URL = config.get("TRAIN_ROUTE_URL")
 FETCH_TRAIN_DATA_URL = config.get("FETCH_TRAIN_DATA_URL")

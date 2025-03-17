@@ -1,18 +1,17 @@
 from time import time
 from selenium.webdriver import FirefoxOptions
 from selenium.webdriver.common.by import By
-
-# from selenium.webdriver import Firefox
 from undetected_geckodriver import Firefox
-from settings import dev as settings
+from django.conf import settings
 from utils.image_filter_service import ImageFiltering
 from os.path import join
 from utils.url_service import UrlServiceV1
+from utils.constants import Timeout, Fixtures, CONFIGURED_CAPTCHA
 from logging import getLogger
 
 logger = getLogger(__name__)
 
-PAGE_SCREENSHOT = join(settings.BASE_DIR, "fixtures/temp/page_screenshot.png")
+PAGE_SCREENSHOT = join(settings.BASE_DIR, Fixtures.PAGE_SS)
 
 
 class SeleniumService:
@@ -40,22 +39,22 @@ class SeleniumService:
             options.add_argument("--disable-gpu")
             options.add_argument("--no-sandbox")
             options.add_argument("--disable-dev-shm-usage")
-            # options.add_argument("--headless")
+            options.add_argument("--headless")
             self.driver = Firefox(options=options)
+            self.driver.implicitly_wait(Timeout.TEN_SECONDS)
             logger.info("Firefox driver initialized successfully")
         except Exception as err:
             logger.error(f"Error initializing Firefox driver: {err}")
-            self.driver = None
 
     def get_json(self):
-        counter = 0
-        while True:
-            try:
-                if counter > 5:
-                    return
-                return self.driver.find_element(By.TAG_NAME, "pre").text
-            except Exception:
-                counter += 1
+        return self.driver.find_element(By.TAG_NAME, "pre").text
+
+    def configure_captcha(self):
+        self.driver.get(settings.CAPTCHA_CONFIGURE_URL)
+        captcha_configure = self.get_json()
+        if captcha_configure == CONFIGURED_CAPTCHA:
+            return ""
+        return self.validate_captcha()
 
     def validate_captcha(self):
         """load captcha page"""

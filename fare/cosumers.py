@@ -1,10 +1,10 @@
 from channels.generic.websocket import SyncConsumer
 from json import loads, dumps
-from pnr.service import PnrService
+from fare.service import FareService
 
 
-class PnrConsumer(SyncConsumer):
-    service_class = PnrService()
+class FareConsumer(SyncConsumer):
+    service_class = FareService()
 
     def websocket_connect(self, event):
         print("connected", event)

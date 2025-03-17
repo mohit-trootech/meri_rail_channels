@@ -2,7 +2,7 @@ from django_extensions.db.models import TimeStampedModel, ActivatorModel
 from utils.model import BaseModel
 
 
-class PnrStatus(BaseModel, TimeStampedModel, ActivatorModel):
+class FareStatus(BaseModel, TimeStampedModel, ActivatorModel):
     class Meta:
-        db_table = "pnr_status"
+        db_table = "fare_status"
         ordering = ["-created"]
