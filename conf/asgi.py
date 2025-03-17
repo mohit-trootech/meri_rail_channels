@@ -6,7 +6,7 @@ from conf.routing import websocket_urlpatterns
 
 config = dotenv_values(".env")
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings.dev")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", config.get("DJANGO_SETTINGS_MODULE"))
 application = ProtocolTypeRouter(
     {
         "http": get_asgi_application(),

@@ -1,13 +1,13 @@
 from settings.base import *  # noqa
 
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["127.0.0.1", "192.168.0.17", "localhost"]
+ALLOWED_HOSTS = ["*", "65.2.176.206"]
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("localhost", 6379)],
+            "hosts": [("redis", 6379)],
         },
     },
 }

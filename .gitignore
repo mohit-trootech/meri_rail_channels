@@ -1,6 +1,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/django,linux,windows,pycharm,vs
 # Edit at https://www.toptal.com/developers/gitignore?templates=django,linux,windows,pycharm,vs
 
+
+settings/dev.py
+
 ### Django ###
 *.log
 *.pot
