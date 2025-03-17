@@ -2,7 +2,7 @@ import pytesseract
 from PIL import Image
 import re
 from os.path import join
-from settings import dev as settings
+from django.conf import settings
 
 PAGE_SCREENSHOT = join(settings.BASE_DIR, "fixtures/temp/page_screenshot.png")
 CAPTCHA_IMAGE = join(settings.BASE_DIR, "fixtures/temp/captcha.png")

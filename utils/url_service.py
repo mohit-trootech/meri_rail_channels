@@ -1,4 +1,4 @@
-from settings import dev as settings
+from django.conf import settings
 from utils.constants import UrlTypesV1, UrlsV1
 
 
